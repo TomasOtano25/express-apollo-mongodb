@@ -7,6 +7,8 @@ const { resolvers } = require('./resolvers')
 
 const app = express()
 
+app.get('/', (req, res) => res.send('Welcome to my api'))
+
 module.exports = app
 
 async function start()
@@ -21,6 +23,8 @@ async function start()
     apolloServer.applyMiddleware({
         app: app
     })
+
+    app.get('*', (req, res) => res.status(404).send('Not Found'))
 
     app.listen(3000, () =>
     {
